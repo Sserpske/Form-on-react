@@ -1,0 +1,58 @@
+{
+  "name": "test-sber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --mode production",
+    "lint": "eslint --ext .tsx,.ts ./src",
+    "lint:fix": "eslint --ext .tsx,.ts ./src --fix",
+    "test": "jest"
+  },
+  "author": "akochura",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "7.13.12",
+    "@babel/preset-env": "7.13.15",
+    "@babel/preset-react": "7.13.13",
+    "autoprefixer": "10.1.0",
+    "babel-eslint": "10.1.0",
+    "copy-webpack-plugin": "7.0.0",
+    "css-loader": "5.0.1",
+    "eslint": "7.24.0",
+    "html-webpack-plugin": "4.5.0",
+    "husky": "4.3.6",
+    "jest": "26.6.3",
+    "normalize.css": "8.0.1",
+    "postcss": "8.2.1",
+    "postcss-import": "14.0.0",
+    "postcss-loader": "4.1.0",
+    "postcss-nested": "5.0.3",
+    "react-test-renderer": "17.0.1",
+    "style-loader": "2.0.0",
+    "webpack": "5.11.0",
+    "webpack-cli": "4.6.0",
+    "webpack-dev-server": "3.11.0",
+    "webpack-merge": "5.7.2"
+  },
+  "dependencies": {
+    "babel-loader": "8.2.2",
+    "classnames": "2.2.6",
+    "express": "4.17.1",
+    "lodash": "4.17.21",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-redux": "7.2.2",
+    "redux": "4.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "browserslist": [
+    "ie >= 11",
+    "last 4 version"
+  ]
+}
