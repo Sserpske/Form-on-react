@@ -10,7 +10,6 @@ export const Input = (props) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      onBlur={onBlur}
       {...restProps}
     />);
 };

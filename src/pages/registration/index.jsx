@@ -1,7 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Form, Input } from '../../components';
+import { Form, Input, Modal } from '../../components';
 import { useForm } from '../../hooks/useForm';
+import { setUserInfo } from '../../store/userActions';
+import { getUserInfo } from '../../store/userSelectors';
+
+export const Registration = () => {
+  const [isShowModal, setIsShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(getUserInfo);
+
+  const onSubmit = (values) => {
+    showModal(true);
+    dispatch(setUserInfo(values));
+  };
+
+  const [
+    fieldsValue,
+    handleChange,
+    handleSubmit,
+    isFormValid,
+  ] = useForm(onSubmit, fields);
+
+  const showModal = () => {
+    setIsShowModal(true);
+  };
+
+  const hideModal = () => {
+    setIsShowModal(false);
+  };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  return (
+    <>
+      <Form
+        onSubmit={handleSubmit}
+        isFormValid={isFormValid}
+        title='Заполните форму'
+        submitButtonText='Начать работу'
+      >
+        {fields.map((field) => (
+          <Input
+            key={field.name}
+            type={field.type}
+            name={field.name}
+            onChange={handleChange}
+            placeholder={field.placeholder}
+            value={fieldsValue[field.name] || ''}
+          />
+        ))}
+      </Form>
+      <Modal
+        isShow={isShowModal}
+        hideModal={hideModal}
+      />
+    </>
+  );
+};
 
 const fields = [
   {
@@ -10,7 +69,7 @@ const fields = [
     placeholder: 'Имя*',
     allowedCharactersRegex: /^[А-ЯЁа-яё ]+$/,
     isRequired: true,
-    validateRegex: /^[а-я]{1,5}$/,
+    validateRegex: /^[А-ЯЁа-яё ]{3,}$/,
   },
   {
     type: 'text',
@@ -18,7 +77,7 @@ const fields = [
     placeholder: 'Номер телефона*',
     allowedCharactersRegex: /^\+?[0-9]*$/,
     isRequired: true,
-    validateRegex: /^[0-9]{1,5}$/,
+    validateRegex: /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{9,11}$/,
   },
   {
     type: 'text',
@@ -26,36 +85,3 @@ const fields = [
     placeholder: 'Электронная почта',
   },
 ];
-
-export const Registration = () => {
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-
-  const [
-    fieldsValue,
-    handleChange,
-    handleSubmit,
-    isFormValid
-  ] = useForm(onSubmit, fields);
-
-  return (
-    <Form
-      onSubmit={handleSubmit}
-      isFormValid={isFormValid}
-      title='Заполните форму'
-      submitButtonText='Начать работу'
-    >
-      {fields.map((field) => (
-        <Input
-          key={field.name}
-          type={field.type}
-          name={field.name}
-          onChange={handleChange}
-          placeholder={field.placeholder}
-          value={fieldsValue[field.name] || ''}
-        />
-      ))}
-    </Form>
-  );
-};
