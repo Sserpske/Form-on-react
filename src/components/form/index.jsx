@@ -1,6 +1,9 @@
 import React from 'react';
+import cn from 'classnames';
 
 import { Button } from '../button';
+
+import styles from './styles.pcss';
 
 export const Form = (props) => {
   const {
@@ -8,24 +11,26 @@ export const Form = (props) => {
     onSubmit,
     title,
     submitButtonText,
-    isFormValid
+    isFormValid,
+    className,
+    agreement,
   } = props;
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <h2>{title}</h2>
-        </div>
-        <div>
-          {children}
-        </div>
-        <div>
-          <Button
-            isDisabled={!isFormValid}
-          >{submitButtonText}</Button>
-        </div>
-      </form>
-    </div>
+    <form className={cn({
+      [styles.form]: true,
+      [className]: !!className,
+    })} onSubmit={onSubmit}>
+      {title && <p className={styles.form__title}>{title}</p>}
+      <div className={styles.form__fieldsContainer}>
+        {children}
+      </div>
+      <div>
+        <Button
+          isDisabled={!isFormValid}
+        >{submitButtonText}</Button>
+        {agreement && agreement}
+      </div>
+    </form>
   );
 };

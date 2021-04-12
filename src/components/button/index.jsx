@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './styles.pcss';
+
 export const Button = (props) => {
   const {
     children,
@@ -9,6 +11,7 @@ export const Button = (props) => {
 
   return (
     <button
+      className={styles.button}
       disabled={isDisabled}
       {...restProps}
     >

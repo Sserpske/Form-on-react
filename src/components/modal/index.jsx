@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import Fade from 'react-reveal/Fade';
 
 import { useClickOutside } from '../../hooks/useClickOutside';
 
@@ -11,11 +12,13 @@ export const Modal = ({ isShow, hideModal }) => {
 
   if (isShow) {
     return (
-      <div className={styles.modal}>
-        <div ref={clickRef} className={styles.modal__main}>
-          <h1>I'm a Modal!</h1>
+      <Fade duration={500}>
+        <div className={styles.modal}>
+          <div ref={clickRef} className={styles.modal__main}>
+            <h1>I'm a Modal!</h1>
+          </div>
         </div>
-      </div>
+      </Fade>
     );
   }
 

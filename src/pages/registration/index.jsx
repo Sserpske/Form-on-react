@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Form, Input, Modal } from '../../components';
+import { Form, Input, Modal, Agreement } from '../../components';
 import { useForm } from '../../hooks/useForm';
 import { setUserInfo } from '../../store/userActions';
 import { getUserInfo } from '../../store/userSelectors';
+import { request } from '../../api';
+
+import styles from './styles.pcss';
 
 export const Registration = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(getUserInfo);
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    const response = await request(values);
+
     showModal(true);
-    dispatch(setUserInfo(values));
+    dispatch(setUserInfo(response));
   };
 
   const [
@@ -32,16 +37,22 @@ export const Registration = () => {
   };
 
   useEffect(() => {
+    // Показываем что положили в стор
     console.log(user);
   }, [user]);
 
   return (
-    <>
+    <div className={styles.registration}>
       <Form
         onSubmit={handleSubmit}
         isFormValid={isFormValid}
-        title='Заполните форму'
+        title='Заголовок формы'
         submitButtonText='Начать работу'
+        className={styles.registration__form}
+        agreement={
+          <Agreement>
+            Нажимая кнопку «Отправить», я даю своё согласие на обработку персональных данных. <a className={styles.registration__agreementLink} href="/images/moskva-krasna-ploshchad-noch.jpg" download={true}>Условия использования данных.</a>
+          </Agreement>}
       >
         {fields.map((field) => (
           <Input
@@ -58,7 +69,7 @@ export const Registration = () => {
         isShow={isShowModal}
         hideModal={hideModal}
       />
-    </>
+    </div>
   );
 };
 
