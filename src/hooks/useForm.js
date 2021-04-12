@@ -46,9 +46,17 @@ export const useForm = (submitCallback, fieldsProperties) => {
     }));
   }, []);
 
-  const handleSubmit = useCallback(e => {
+  const handleSubmit = useCallback(async e => {
     e.preventDefault();
-    submitCallback(fieldsValue);
+
+    try {
+      await submitCallback(fieldsValue);
+
+      setFieldsValue({});
+      setIsFormValid(false);
+    } catch (e) {
+      console.log(e);
+    }
   }, [fieldsValue]);
 
   useEffect(() => {

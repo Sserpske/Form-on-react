@@ -25,12 +25,10 @@ export const Form = (props) => {
       <div className={styles.form__fieldsContainer}>
         {children}
       </div>
-      <div>
-        <Button
-          isDisabled={!isFormValid}
-        >{submitButtonText}</Button>
-        {agreement && agreement}
-      </div>
+      <Button
+        isDisabled={!isFormValid}
+      >{submitButtonText}</Button>
+      {agreement && agreement}
     </form>
   );
 };

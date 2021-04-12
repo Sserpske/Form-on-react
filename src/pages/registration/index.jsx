@@ -68,7 +68,11 @@ export const Registration = () => {
       <Modal
         isShow={isShowModal}
         hideModal={hideModal}
-      />
+        success={true}
+      >
+        Заявка отправлена! <br/>
+        Менеджер уже звонит, посмотрите на телефон.
+      </Modal>
     </div>
   );
 };
