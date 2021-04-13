@@ -6,14 +6,12 @@ import { useClickOutside } from '../../hooks/useClickOutside';
 
 import styles from './styles.pcss';
 
-export const Modal = (
-  {
-    isShow,
-    hideModal,
-    success,
-    children,
-  }
-) => {
+export const Modal = ({
+  isShow,
+  hideModal,
+  success,
+  children,
+}) => {
   const clickRef = useRef();
 
   useClickOutside(clickRef, hideModal);

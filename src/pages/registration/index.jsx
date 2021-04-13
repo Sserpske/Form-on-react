@@ -62,6 +62,7 @@ export const Registration = () => {
             onChange={handleChange}
             placeholder={field.placeholder}
             value={fieldsValue[field.name] || ''}
+            sizeS={field.sizeS}
           />
         ))}
       </Form>
@@ -93,6 +94,7 @@ const fields = [
     allowedCharactersRegex: /^\+?[0-9]*$/,
     isRequired: true,
     validateRegex: /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{9,11}$/,
+    sizeS: true,
   },
   {
     type: 'text',

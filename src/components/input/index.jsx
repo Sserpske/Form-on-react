@@ -1,13 +1,22 @@
 import React from 'react';
+import cn from 'classnames';
 
 import styles from './styles.pcss';
 
-export const Input = (props) => {
-  const { name, placeholder, value, type, onChange } = props;
-
+export const Input = ({
+  name,
+  placeholder,
+  value,
+  type,
+  onChange,
+  sizeS,
+}) => {
   return (
     <input
-      className={styles.input}
+      className={cn({
+        [styles.input]: true,
+        [styles.input_s]: sizeS,
+      })}
       name={name}
       type={type}
       placeholder={placeholder}
